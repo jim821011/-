@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    let zoo = [
-        {
+    let zoo = [{
             id: 1,
             animal: "鼠"
         },
@@ -48,14 +47,20 @@ document.addEventListener("DOMContentLoaded", function () {
         {
             id: 12,
             animal: "豬"
+        },
+        {
+            id: 13,
+            animal: "貓"
         }
     ];
 
     let firstOpen = null;
     let secondOpen = null;
     let randomAnimal = [];
+    let randomAnimalId = [];
+    let completeCardId = [];
     let getSum = 12;
-    let divOpen = true;
+    let point = 0;
 
     createDiv();
 
@@ -90,18 +95,25 @@ document.addEventListener("DOMContentLoaded", function () {
             if (randomAnimalNum[random2] < 2) {
                 randomAnimalNum[random2]++;
                 randomAnimal.push(randomArr[random2]);
+                zoo.forEach(e => {
+                    if (e.animal == randomArr[random2]) {
+                        randomAnimalId.push(e.id);
+                    }
+                })
             }
             if (randomAnimal.length >= getSum * 2) {
                 break;
             }
         }
+        // console.log(randomAnimal);
+        // console.log(randomAnimalId);
     }
 
     function createDiv() {
         getAnimal();
         let str = "";
         for (let i = 0; i < randomAnimal.length; i++) {
-            str += `<div class="game-card-box">
+            str += `<div class="game-card-box" data-id="${randomAnimalId[i]}">
             <div class="card-style card-font">
                 <span>${randomAnimal[i]}</span>
             </div>
@@ -113,17 +125,42 @@ document.addEventListener("DOMContentLoaded", function () {
         $(".gmae-site").html(str);
     }
 
-    $(".game-card-box").click(function () {
-        if (divOpen) {
-            $(this).addClass("actived")
-            divOpen = !divOpen;
-        } else {
-            $(this).removeClass("actived")
-            divOpen = !divOpen;
+    $(".game-card-box").on("click", cardClick);
+
+    function cardClick() {
+        let getId = parseInt($(this).attr("data-id"));
+        let num = completeCardId.indexOf(getId);
+        let isOpen = $(this).hasClass("actived");
+        if (num == -1) {
+            if (!isOpen) {
+                $(this).addClass("actived");
+                if (firstOpen === null) {
+                    firstOpen = $(this);
+                } else {
+                    secondOpen = $(this);
+                    isSame();
+                }
+            }
         }
-    });
+    }
 
-
+    function isSame() {
+        $(".game-card-box").off("click")
+        if (firstOpen.attr("data-id") == secondOpen.attr("data-id")) {
+            point++;
+            firstOpen = null;
+            secondOpen = null;
+            $(".game-card-box").on("click", cardClick)
+        } else {
+            setTimeout(function () {
+                firstOpen.removeClass("actived");
+                secondOpen.removeClass("actived");
+                firstOpen = null;
+                secondOpen = null;
+                $(".game-card-box").on("click", cardClick);
+            }, 500);
+        }
+    }
 
 
 })
