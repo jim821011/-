@@ -1,53 +1,53 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     let zoo = [{
-        id: 1,
-        animal: "../imgs/Aquarius.jpg"
-    },
-    {
-        id: 2,
-        animal: "../imgs/Aries.jpg"
-    },
-    {
-        id: 3,
-        animal: "../imgs/Cancer.jpg"
-    },
-    {
-        id: 4,
-        animal: "../imgs/Capricorn.jpg"
-    },
-    {
-        id: 5,
-        animal: "../imgs/Gemini.jpg"
-    },
-    {
-        id: 6,
-        animal: "../imgs/Leo.jpg"
-    },
-    {
-        id: 7,
-        animal: "../imgs/Libra.jpg"
-    },
-    {
-        id: 8,
-        animal: "../imgs/Pisces.jpg"
-    },
-    {
-        id: 9,
-        animal: "../imgs/Sagittarius.jpg"
-    },
-    {
-        id: 10,
-        animal: "../imgs/Scorpio.jpg"
-    },
-    {
-        id: 11,
-        animal: "../imgs/Taurus.jpg"
-    },
-    {
-        id: 12,
-        animal: "../imgs/Virgo.jpg"
-    }
+            id: 1,
+            animal: "./imgs/Aquarius.jpg"
+        },
+        {
+            id: 2,
+            animal: "./imgs/Aries.jpg"
+        },
+        {
+            id: 3,
+            animal: "./imgs/Cancer.jpg"
+        },
+        {
+            id: 4,
+            animal: "./imgs/Capricorn.jpg"
+        },
+        {
+            id: 5,
+            animal: "./imgs/Gemini.jpg"
+        },
+        {
+            id: 6,
+            animal: "./imgs/Leo.jpg"
+        },
+        {
+            id: 7,
+            animal: "./imgs/Libra.jpg"
+        },
+        {
+            id: 8,
+            animal: "./imgs/Pisces.jpg"
+        },
+        {
+            id: 9,
+            animal: "./imgs/Sagittarius.jpg"
+        },
+        {
+            id: 10,
+            animal: "./imgs/Scorpio.jpg"
+        },
+        {
+            id: 11,
+            animal: "./imgs/Taurus.jpg"
+        },
+        {
+            id: 12,
+            animal: "./imgs/Virgo.jpg"
+        }
     ];
 
     let firstOpen = null;
