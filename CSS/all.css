@@ -4,16 +4,56 @@
 }
 
 body {
-    background-color: lightgrey;
+    /* background-color: lightgrey; */
+    background-image: url(../imgs/cyberpunk.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    min-height: 100vh;
+}
+
+.score-board {
+    padding: 5px 40px;
+    border-radius: 0px 0px 15px 15px;
+    background-color: rgba(255, 255, 255, .8);
+    display: flex;
+    justify-content: space-between;
+}
+
+.score-board span {
+    font-weight: bolder;
+    font-size: 1.5rem;
+}
+
+.timer-box {
+    display: flex;
+}
+
+.timer-box button {
+    margin-left: 8px;
+    padding: 5px;
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 576px) {
+    .score-board {
+        flex-direction: column;
+    }
+
+    .timer-box {
+        justify-content: end;
+    }
 }
 
 .gmae-site {
     display: flex;
     flex-wrap: wrap;
-    margin: 50px auto 0;
+    margin: 50px auto;
     max-width: 750px;
-    background-color: white;
+    background-color: rgba(255, 255, 255, .8);
     padding: 1%;
+    border-radius: 10px;
 }
 
 .game-card-box {
@@ -39,14 +79,18 @@ body {
 }
 
 .card-font {
-    background-color: lightblue;
+    /* background-color: lightblue; */
     transform: rotateY(180deg);
     /* 暫定樣式 */
     display: flex;
     justify-content: center;
-    align-items: center;
-    font-weight: bolder;
-    font-size: 2rem;
+}
+
+.card-font img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
 .card-back {
@@ -63,13 +107,4 @@ body {
 
 .game-card-box.actived .card-back {
     transform: rotateY(180deg);
-}
-
-
-option {
-    height: 25px;
-    text-align: center;
-    background-size: 100px;
-    background-repeat: no-repeat;
-    background-position: 5px 2px;
 }

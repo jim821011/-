@@ -1,57 +1,53 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     let zoo = [{
-            id: 1,
-            animal: "鼠"
-        },
-        {
-            id: 2,
-            animal: "牛"
-        },
-        {
-            id: 3,
-            animal: "虎"
-        },
-        {
-            id: 4,
-            animal: "兔"
-        },
-        {
-            id: 5,
-            animal: "龍"
-        },
-        {
-            id: 6,
-            animal: "蛇"
-        },
-        {
-            id: 7,
-            animal: "馬"
-        },
-        {
-            id: 8,
-            animal: "羊"
-        },
-        {
-            id: 9,
-            animal: "猴"
-        },
-        {
-            id: 10,
-            animal: "雞"
-        },
-        {
-            id: 11,
-            animal: "狗"
-        },
-        {
-            id: 12,
-            animal: "豬"
-        },
-        {
-            id: 13,
-            animal: "貓"
-        }
+        id: 1,
+        animal: "../imgs/Aquarius.jpg"
+    },
+    {
+        id: 2,
+        animal: "../imgs/Aries.jpg"
+    },
+    {
+        id: 3,
+        animal: "../imgs/Cancer.jpg"
+    },
+    {
+        id: 4,
+        animal: "../imgs/Capricorn.jpg"
+    },
+    {
+        id: 5,
+        animal: "../imgs/Gemini.jpg"
+    },
+    {
+        id: 6,
+        animal: "../imgs/Leo.jpg"
+    },
+    {
+        id: 7,
+        animal: "../imgs/Libra.jpg"
+    },
+    {
+        id: 8,
+        animal: "../imgs/Pisces.jpg"
+    },
+    {
+        id: 9,
+        animal: "../imgs/Sagittarius.jpg"
+    },
+    {
+        id: 10,
+        animal: "../imgs/Scorpio.jpg"
+    },
+    {
+        id: 11,
+        animal: "../imgs/Taurus.jpg"
+    },
+    {
+        id: 12,
+        animal: "../imgs/Virgo.jpg"
+    }
     ];
 
     let firstOpen = null;
@@ -61,6 +57,8 @@ document.addEventListener("DOMContentLoaded", function () {
     let completeCardId = [];
     let getSum = 12;
     let point = 0;
+    let timer = 0; //毫秒
+    let timerMe;
 
     createDiv();
 
@@ -109,13 +107,15 @@ document.addEventListener("DOMContentLoaded", function () {
         // console.log(randomAnimalId);
     }
 
+    $("#time-start").on("click", timerStart);
+
     function createDiv() {
         getAnimal();
         let str = "";
         for (let i = 0; i < randomAnimal.length; i++) {
             str += `<div class="game-card-box" data-id="${randomAnimalId[i]}">
             <div class="card-style card-font">
-                <span>${randomAnimal[i]}</span>
+                <img src="${randomAnimal[i]}">
             </div>
             <div class="card-style card-back">
 
@@ -124,8 +124,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         $(".gmae-site").html(str);
     }
-
-    $(".game-card-box").on("click", cardClick);
 
     function cardClick() {
         let getId = parseInt($(this).attr("data-id"));
@@ -148,6 +146,8 @@ document.addEventListener("DOMContentLoaded", function () {
         $(".game-card-box").off("click")
         if (firstOpen.attr("data-id") == secondOpen.attr("data-id")) {
             point++;
+            showPoint();
+            completeCardId.push(parseInt(firstOpen.attr("data-id")));
             firstOpen = null;
             secondOpen = null;
             $(".game-card-box").on("click", cardClick)
@@ -158,9 +158,45 @@ document.addEventListener("DOMContentLoaded", function () {
                 firstOpen = null;
                 secondOpen = null;
                 $(".game-card-box").on("click", cardClick);
-            }, 500);
+            }, 400);
         }
+        finishGame();
     }
 
+    function showPoint() {
+        $("#point").text(point)
+    }
 
+    function timerStart() {
+        timerMe = setInterval(function () {
+            timer += 10;
+            let seconds = Math.floor(timer / 1000);
+            let milliseconds = timer % 1000;
+            $('#timer').text(`${seconds}:${milliseconds.toString().padStart(2, '0').slice(0, 2)}`);
+        }, 10)
+        $("#time-start").off("click");
+        $(".game-card-box").on("click", cardClick);
+        $("#game-reset").on("click", reset)
+    }
+
+    function reset() {
+        $("#timer").text("0:00");
+        timer = 0;
+        $("#point").text("");
+        point = 0;
+        randomAnimal = [];
+        randomAnimalId = [];
+        completeCardId = [];
+        clearInterval(timerMe);
+        timerMe = null;
+        $("#time-start").on("click", timerStart);
+        createDiv();
+        $("#game-reset").off("click");
+    }
+
+    function finishGame() {
+        if (completeCardId.length == getSum) {
+            clearInterval(timerMe);
+        }
+    }
 })
