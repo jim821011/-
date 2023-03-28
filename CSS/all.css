@@ -51,7 +51,7 @@ body {
 
 .card-back {
     background-color: black;
-    background-image: url(imgs/card-back.png);
+    background-image: url(../imgs/card-back.png);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;
